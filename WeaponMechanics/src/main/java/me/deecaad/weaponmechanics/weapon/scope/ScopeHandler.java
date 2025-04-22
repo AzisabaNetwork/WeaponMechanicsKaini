@@ -170,7 +170,7 @@ public class ScopeHandler implements IValidator, TriggerListener {
         // then the entity is not allowed to enter scope until the cooldown is over.
         boolean unscopeAfterShot = config.getBoolean(weaponTitle + ".Scope.Unscope_After_Shot");
         int delayBetweenShots = config.getInt(weaponTitle + ".Shoot.Delay_Between_Shots");
-        if (unscopeAfterShot && delayBetweenShots != 0 && !NumberUtil.hasMillisPassed(zoomData.getHandData().getLastShotTime(), delayBetweenShots)) {
+        if (unscopeAfterShot && delayBetweenShots != 0 && !NumberUtil.hasMillisPassed(zoomData.getHandData().getLastShotTime(weaponTitle), delayBetweenShots)) {
             return false;
         }
 

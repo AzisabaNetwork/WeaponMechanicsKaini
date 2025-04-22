@@ -16,8 +16,10 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class HandData {
 
@@ -27,7 +29,7 @@ public class HandData {
     private FullAutoTask fullAutoTask;
     private TaskImplementation<Void> fullAutoWrappedTask;
     private TaskImplementation<Void> burstTask;
-    private long lastShotTime;
+    private final Map<String,Long> lastShotTime = new HashMap<>();
     private long lastScopeTime;
     private long lastEquipTime;
     private double spreadChange;
@@ -95,7 +97,7 @@ public class HandData {
             firedWeaponStopShootEvent = true;
 
             Bukkit.getPluginManager().callEvent(new WeaponStopShootingEvent(lastWeaponShotTitle, lastWeaponShot, entityWrapper.getEntity(), mainhand ? EquipmentSlot.HAND : EquipmentSlot.OFF_HAND,
-                lastShotTime));
+                lastShotTime.get(lastWeaponShotTitle)));
         }
 
         if (!trySkinUpdate)
@@ -159,12 +161,12 @@ public class HandData {
         this.burstTask = burstTask;
     }
 
-    public void setLastShotTime(long lastShotTime) {
-        this.lastShotTime = lastShotTime;
+    public void setLastShotTime(String weaponTitle, long lastShotTime) {
+        this.lastShotTime.put(weaponTitle, lastShotTime);
     }
 
-    public long getLastShotTime() {
-        return lastShotTime;
+    public long getLastShotTime(String weaponTitle) {
+        return lastShotTime.getOrDefault(weaponTitle,0L);
     }
 
     public long getLastScopeTime() {

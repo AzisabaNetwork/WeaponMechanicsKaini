@@ -177,13 +177,13 @@ public class MoveTask implements Consumer<TaskImplementation<Void>> {
         if (handData.getLastWeaponShotTitle() == null || handData.getLastWeaponShot() == null)
             return;
         // Hasn't been 1 second since they stopped shooting
-        if (System.currentTimeMillis() - handData.getLastShotTime() <= 1200L)
+        if (System.currentTimeMillis() - handData.getLastShotTime(handData.getLastWeaponShotTitle()) <= 1200L)
             return;
 
         handData.setFiredWeaponStopShootEvent(true);
         WeaponStopShootingEvent event = new WeaponStopShootingEvent(handData.getLastWeaponShotTitle(), handData.getLastWeaponShot(), entityWrapper.getEntity(), handData.isMainhand()
             ? EquipmentSlot.HAND
-            : EquipmentSlot.OFF_HAND, handData.getLastShotTime());
+            : EquipmentSlot.OFF_HAND, handData.getLastShotTime(handData.getLastWeaponShotTitle()));
         Bukkit.getPluginManager().callEvent(event);
     }
 

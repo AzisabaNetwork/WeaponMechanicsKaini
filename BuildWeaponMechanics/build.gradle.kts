@@ -53,7 +53,7 @@ tasks.shadowJar {
     val weaponMechanicsVersion = findProperty("weaponMechanicsVersion") as? String ?: throw IllegalArgumentException("weaponMechanicsVersion was null")
 
     destinationDirectory.set(file("../build"))
-    archiveFileName.set("WeaponMechanics-${weaponMechanicsVersion}.jar")
+    archiveFileName.set("WeaponMechanicsKaini-${weaponMechanicsVersion}.jar")
 
     dependencies {
         include(project(":WeaponMechanics"))

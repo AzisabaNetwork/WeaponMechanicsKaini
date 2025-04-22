@@ -6,18 +6,21 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class WeaponStopShootingEvent extends WeaponEvent {
     private static final HandlerList handlers = new HandlerList();
 
-    private final long lastShootTime;
+    private final Map<String, Long> lastShootTime = new HashMap<>();
 
-    public WeaponStopShootingEvent(String weaponTitle, ItemStack weaponStack, LivingEntity shooter, EquipmentSlot hand, long lastShootTime) {
+    public WeaponStopShootingEvent(String weaponTitle, ItemStack weaponStack, LivingEntity shooter, EquipmentSlot hand, Long lastShootTime) {
         super(weaponTitle, weaponStack, shooter, hand);
-        this.lastShootTime = lastShootTime;
+        this.lastShootTime.put(weaponTitle, lastShootTime);
     }
 
     public long getLastShootTime() {
-        return lastShootTime;
+        return lastShootTime.getOrDefault(weaponTitle,0L);
     }
 
     @NotNull @Override

@@ -76,60 +76,64 @@ signing {
     sign(publishing.publications)
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("mavenJava") {
-            from(components["java"])
-
-            artifact(javadocJar)
-            artifact(sourcesJar)
-
-            pom {
-                name.set("WeaponMechanics")
-                description.set("A new age of weapons in Minecraft")
-                url.set("https://github.com/WeaponMechanics/MechanicsMain")
-
-                groupId = "com.cjcrafter"
-                artifactId = "weaponmechanics"
-                version = findProperty("weaponMechanicsVersion") as? String ?: throw IllegalArgumentException("property was null")
-
-                licenses {
-                    license {
-                        name.set("The MIT License")
-                        url.set("https://opensource.org/licenses/MIT")
-                    }
-                }
-                developers {
-                    developer {
-                        id.set("CJCrafter")
-                        name.set("Collin Barber")
-                        email.set("collinjbarber@gmail.com")
-                    }
-                    developer {
-                        id.set("DeeCaaD")
-                        name.set("DeeCaaD")
-                        email.set("perttu.kangas@hotmail.fi")
-                    }
-                }
-                scm {
-                    connection.set("scm:git:https://github.com/WeaponMechanics/MechanicsMain.git")
-                    developerConnection.set("scm:git:ssh://github.com/WeaponMechanics/MechanicsMain.git")
-                    url.set("https://github.com/WeaponMechanics/MechanicsMain")
-                }
-            }
-        }
-    }
-
-    repositories {
-        maven {
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
-            credentials {
-                username = findProperty("OSSRH_USERNAME").toString()
-                password = findProperty("OSSRH_PASSWORD").toString()
-            }
-        }
-    }
-}
+//publishing {
+//    publications {
+//        create<MavenPublication>("mavenJava") {
+//            from(components["java"])
+//
+//            artifact(javadocJar)
+//            artifact(sourcesJar)
+//
+//            pom {
+//                name.set("WeaponMechanicsKaini")
+//                description.set("A new age of weapons in Minecraft")
+//                url.set("https://github.com/WeaponMechanics/MechanicsMain")
+//
+//                groupId = "com.cjcrafter"
+//                artifactId = "weaponmechanicsKaini"
+//                version = findProperty("weaponMechanicsVersion") as? String ?: throw IllegalArgumentException("property was null")
+//
+//                licenses {
+//                    license {
+//                        name.set("The MIT License")
+//                        url.set("https://opensource.org/licenses/MIT")
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id.set("CJCrafter")
+//                        name.set("Collin Barber")
+//                        email.set("collinjbarber@gmail.com")
+//                    }
+//                    developer {
+//                        id.set("DeeCaaD")
+//                        name.set("DeeCaaD")
+//                        email.set("perttu.kangas@hotmail.fi")
+//                    }
+//                    developer {
+//                        id.set("miyabi0333")
+//                        name.set("miyabi0333")
+//                    }
+//                }
+//                scm {
+//                    connection.set("scm:git:https://github.com/WeaponMechanics/MechanicsMain.git")
+//                    developerConnection.set("scm:git:ssh://github.com/WeaponMechanics/MechanicsMain.git")
+//                    url.set("https://github.com/WeaponMechanics/MechanicsMain")
+//                }
+//            }
+//        }
+//    }
+//
+//    repositories {
+//        maven {
+//            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2")
+//            credentials {
+//                username = findProperty("OSSRH_USERNAME").toString()
+//                password = findProperty("OSSRH_PASSWORD").toString()
+//            }
+//        }
+//    }
+//}
 
 // After publishing, the nexus plugin will automatically close and release
 tasks.named("publish") {
