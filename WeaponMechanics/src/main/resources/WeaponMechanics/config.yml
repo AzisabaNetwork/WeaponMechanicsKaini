@@ -24,6 +24,17 @@ Database:
   SQLite:
     Absolute_Path: "plugins/WeaponMechanics/weaponmechanics.db"
 
+# InventoryControlでもてる武器数を制限
+Inventory_Control:
+  Main:
+    Amount: 1
+  Sub:
+    Amount: 1
+  Extra:
+    Amount: 2
+  Extra2:
+    Amount: 0
+
 # Used to keep track of weapon assists
 Assists_Event:
   Enable: true

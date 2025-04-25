@@ -102,6 +102,11 @@ public class WeaponItemSerializer extends ItemSerializer {
             meta.setTool(tool);
         }
 
+        List<String> list = config.getObject("Weapons.AK47.Info.Inventory_Control", List.class);
+        if (list != null) {
+            String[] array = list.toArray(new String[0]);
+            CustomTag.INVENTORY_CONTROL.setStringArray(weaponStack, array);
+        }
         CustomTag.WEAPON_TITLE.setString(weaponStack, weaponTitle);
         weaponStack = super.serializeRecipe(data, weaponStack);
         return weaponStack;

@@ -23,13 +23,7 @@ import org.bukkit.inventory.meta.Damageable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static me.deecaad.weaponmechanics.WeaponMechanics.getConfigurations;
 
@@ -339,5 +333,9 @@ public class InfoHandler implements IValidator {
         if (mechanics != null) {
             configuration.set(data.getKey() + ".Weapon_Break_Mechanics", mechanics);
         }
+    }
+
+    public Set<String> getInventoryControl(ItemStack weaponStack) {
+        return new HashSet<>(Arrays.asList(CustomTag.INVENTORY_CONTROL.getStringArray(weaponStack)));
     }
 }

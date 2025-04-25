@@ -103,6 +103,8 @@ public class WeaponMechanics {
     Database database;
     ServerImplementation foliaScheduler;
 
+    public static Map<String, Integer> inventoryControlCostMap = new HashMap<>();
+
     // public so people can import a static variable
     public static Debugger debug;
 
@@ -271,6 +273,12 @@ public class WeaponMechanics {
             FileReader basicConfigurationReader = new FileReader(debug, List.of(new DamageModifier()), validators);
             Configuration filledMap = basicConfigurationReader.fillOneFile(configyml);
             basicConfiguration = basicConfigurationReader.usePathToSerializersAndValidators(filledMap);
+
+            //Todo:いつか自由に追加できるように、、、
+            inventoryControlCostMap.put("Main", getBasicConfigurations().getInt("Inventory_Control.Main.Amount"));
+            inventoryControlCostMap.put("Sub", getBasicConfigurations().getInt("Inventory_Control.Sub.Amount"));
+            inventoryControlCostMap.put("Extra", getBasicConfigurations().getInt("Inventory_Control.Extra.Amount"));
+            inventoryControlCostMap.put("Extra2", getBasicConfigurations().getInt("Inventory_Control.Extra2.Amount"));
         } else {
             // Just creates empty map to prevent other issues
             basicConfiguration = new FastConfiguration();
@@ -356,8 +364,8 @@ public class WeaponMechanics {
 
         try {
             QueueSerializerEvent event = new QueueSerializerEvent(javaPlugin, getDataFolder());
-            event.addSerializers(new SerializerInstancer(new JarFile(getFile())).createAllInstances(getClassLoader()));
-            event.addValidators(validators);
+                event.addSerializers(new SerializerInstancer(new JarFile(getFile())).createAllInstances(getClassLoader()));
+                event.addValidators(validators);
             Bukkit.getPluginManager().callEvent(event);
 
             Configuration temp = new FileReader(debug, event.getSerializers(), event.getValidators())

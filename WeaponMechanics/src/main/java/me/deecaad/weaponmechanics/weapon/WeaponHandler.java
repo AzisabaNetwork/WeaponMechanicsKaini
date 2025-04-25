@@ -1,6 +1,7 @@
 package me.deecaad.weaponmechanics.weapon;
 
 import me.deecaad.core.utils.LogLevel;
+import me.deecaad.weaponmechanics.WeaponMechanics;
 import me.deecaad.weaponmechanics.listeners.trigger.TriggerPlayerListeners;
 import me.deecaad.weaponmechanics.weapon.damage.DamageHandler;
 import me.deecaad.weaponmechanics.weapon.info.InfoHandler;
@@ -29,6 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import static me.deecaad.weaponmechanics.WeaponMechanics.debug;
 import static me.deecaad.weaponmechanics.WeaponMechanics.getEntityWrapper;
@@ -144,6 +146,11 @@ public class WeaponHandler {
                 // Most of the time other triggers aren't allowed during same loop
                 if (!listener.allowOtherTriggers()) {
                     return;
+                }
+                getInfoHandler().getInventoryControl(weaponStack);
+
+                for(Map.Entry<String, Integer> entry: WeaponMechanics.inventoryControlCostMap.entrySet()){
+                    //ホットバーに入っている武器のinventorycontrolを見る
                 }
             }
         } catch (Exception e) {

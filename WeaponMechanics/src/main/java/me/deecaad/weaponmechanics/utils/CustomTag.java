@@ -88,7 +88,12 @@ public enum CustomTag {
      * Prevent remove is stored as an int, and is used by ArmorMechanics as a marker to prevent armor
      * from being unequipped.
      */
-    PREVENT_REMOVE(null, "armormechanics");
+    PREVENT_REMOVE(null, "armormechanics"),
+
+    /**
+     * InventoryControl メイン武器やサブ武器などの制限用に使用されるフラグ
+     */
+    INVENTORY_CONTROL;
 
     private final String owningPlugin;
     private final String id;
